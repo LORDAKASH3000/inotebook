@@ -1,9 +1,8 @@
 const connectToMongo = require('./db');
 const express = require('express');
-const { query } = require('express-validator');
 connectToMongo();
 const app = express()
-const port = 3000
+const port = 3300
 app.use(express.json());
 
 // Available Routes
