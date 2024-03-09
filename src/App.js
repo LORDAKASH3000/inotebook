@@ -11,6 +11,8 @@ import About from "./components/Others/About";
 import LogIn from "./components/Authentication/SignIn";
 import SignUp from "./components/Authentication/SignUp";
 import LogOut from "./components/Authentication/SignOut";
+import NoteState from "./Context/Notes/NoteState";
+import UserState from "./Context/User/UserState";
 
 function App() {
   const router = createBrowserRouter([
@@ -42,9 +44,13 @@ function App() {
     },
   ]);
   return (
-    <div className="App">
-      <RouterProvider router={router}/>
-    </div>
+    <UserState>
+      <NoteState>
+        <div className="App">
+          <RouterProvider router={router}/>
+        </div>
+      </NoteState>
+    </UserState>
   );
 }
 
