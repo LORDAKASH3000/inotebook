@@ -14,6 +14,7 @@ import LogOut from "./components/Authentication/SignOut";
 import NoteState from "./Context/Notes/NoteState";
 import UserState from "./Context/User/UserState";
 
+
 function App() {
   const router = createBrowserRouter([
     {

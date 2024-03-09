@@ -22,7 +22,7 @@ const NoteList = () => {
           "__v": 0
         },
         {
-          "_id": "65e8b1db7d5dcfc69ebb13a1",
+          "_id": "65e8b1db7d5dcfc69ebb13a11",
           "user": "65d779a2e768e87f3cd3ae1d",
           "title": "First note",
           "description": "This is my first note",
@@ -31,7 +31,7 @@ const NoteList = () => {
           "__v": 0
         },
         {
-          "_id": "65e8b1db7d5dcfc69ebb13a1",
+          "_id": "65e8b1db7d5dcfc69ebb13a12",
           "user": "65d779a2e768e87f3cd3ae1d",
           "title": "First note",
           "description": "This is my first note",
@@ -40,7 +40,7 @@ const NoteList = () => {
           "__v": 0
         },
         {
-          "_id": "65e8b1db7d5dcfc69ebb13a1",
+          "_id": "65e8b1db7d5dcfc69ebb13a13",
           "user": "65d779a2e768e87f3cd3ae1d",
           "title": "First note",
           "description": "This is my first note",
@@ -49,7 +49,7 @@ const NoteList = () => {
           "__v": 0
         },
         {
-          "_id": "65e8b1db7d5dcfc69ebb13a1",
+          "_id": "65e8b1db7d5dcfc69ebb13a14",
           "user": "65d779a2e768e87f3cd3ae1d",
           "title": "First note",
           "description": "This is my first note",
@@ -58,7 +58,7 @@ const NoteList = () => {
           "__v": 0
         },
         {
-          "_id": "65e8b1db7d5dcfc69ebb13a1",
+          "_id": "65e8b1db7d5dcfc69ebb13a15",
           "user": "65d779a2e768e87f3cd3ae1d",
           "title": "First note",
           "description": "This is my first note",
@@ -67,7 +67,7 @@ const NoteList = () => {
           "__v": 0
         },
         {
-          "_id": "65e8b1db7d5dcfc69ebb13a1",
+          "_id": "65e8b1db7d5dcfc69ebb13a16",
           "user": "65d779a2e768e87f3cd3ae1d",
           "title": "First note",
           "description": "This is my first note",
@@ -76,7 +76,7 @@ const NoteList = () => {
           "__v": 0
         },
         {
-          "_id": "65e8b1db7d5dcfc69ebb13a1",
+          "_id": "65e8b1db7d5dcfc69ebb13a17",
           "user": "65d779a2e768e87f3cd3ae1d",
           "title": "First note",
           "description": "This is my first note",
@@ -85,7 +85,7 @@ const NoteList = () => {
           "__v": 0
         },
         {
-          "_id": "65e8b1db7d5dcfc69ebb13a1",
+          "_id": "65e8b1db7d5dcfc69ebb13a18",
           "user": "65d779a2e768e87f3cd3ae1d",
           "title": "First note",
           "description": "This is my first note",
@@ -98,7 +98,7 @@ const NoteList = () => {
   return (
     <div className='row'>
       {notes.map((note)=>{
-        return <Note title={note.title} desc={note.desc} tag={note.tag} />
+        return <Note key={note._id} title={note.title} desc={note.desc} tag={note.tag} />
       })}
     </div>
   )
