@@ -19,11 +19,11 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <TopNavbar />,
+      element: <UserState><TopNavbar /></UserState>,
       children:[
         { 
           path: "/",
-          element: <Home />,
+          element: <NoteState><Home /></NoteState>,
         },
         { 
           path: "login",
@@ -45,13 +45,9 @@ function App() {
     },
   ]);
   return (
-    <UserState>
-      <NoteState>
-        <div className="App">
-          <RouterProvider router={router}/>
-        </div>
-      </NoteState>
-    </UserState>
+    <div className="App">
+      <RouterProvider router={router}/>
+    </div>
   );
 }
 
