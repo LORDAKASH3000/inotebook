@@ -3,46 +3,14 @@ import UserContext from './UserContext';
 import { useNavigate } from "react-router-dom";
 
 const UserState = (props)=>{
-    const navigate = useNavigate();
-    const [user, setUser] = useState({
-        name: "Anonymous",
-        _id: null,
-        auth_token: null,
-        isAuthenticate: false
-    });
     
-    useEffect(()=>{
-        isAuthenticate();
-    },[]);
+    const auth_token = localStorage.getItem('auth-token');
 
-    const isAuthenticate = () => {
-        let a_token = localStorage.getItem('auth-token');
-        if (a_token !== null){
-            setUser(prevUser=>({...prevUser, ["auth_token"]:a_token, ["isAuthenticate"]:true }))
-            fetchUserDetails(a_token);
-        }
+    const signUp = ()=>{
+        
     }
 
-    const signUp = async(e, {name, email, password})=>{
-        e.preventDefault();
-        const response = await fetch(process.env.REACT_APP_SIGNUP_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({name, email, password})
-        });
-        const data = await response.json();
-        if (data?.authToken){
-            localStorage.setItem('auth-token', data.authToken);
-            isAuthenticate();
-            fetchUserDetails(data.authToken);
-            return {success: true};
-        }
-        return {data, success: false};
-    }
-
-    const signIn = async (e, {email, password})=>{
+    const signIn = async ()=>{
         e.preventDefault();
         const response = await fetch(process.env.REACT_APP_SIGNIN_URL, {
             method: 'POST',
