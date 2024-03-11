@@ -5,10 +5,8 @@ import { useNavigate } from "react-router-dom";
 const UserState = (props)=>{
     const navigate = useNavigate();
     const [user, setUser] = useState({
-        name: "Anonymous",
-        _id: null,
-        auth_token: null,
-        isAuthenticate: false
+        auth_token: localStorage.getItem('auth-token'),
+        isAuthenticate: localStorage.getItem('auth-token')===null?false:true
     });
     
     useEffect(()=>{
@@ -16,13 +14,9 @@ const UserState = (props)=>{
     },[]);
 
     const isAuthenticate = () => {
-        let a_token = localStorage.getItem('auth-token');
-        if (a_token !== null){
-            setUser(prevUser=>({...prevUser, ["auth_token"]:a_token, ["isAuthenticate"]:true }))
-            fetchUserDetails(a_token);
-        }
+        if (user.auth_token !== null)fetchUserDetails(user.auth_token);
     }
-
+    
     const signUp = async(e, {name, email, password})=>{
         e.preventDefault();
         const response = await fetch(process.env.REACT_APP_SIGNUP_URL, {
@@ -62,7 +56,7 @@ const UserState = (props)=>{
     }
 
     const fetchUserDetails = async (auth_token)=>{
-        const response = await fetch(process.env.REACT_APP_FETCH_USER_DETAILS, {
+        const response = await fetch(process.env.REACT_APP_FETCH_USER_DETAILS_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
