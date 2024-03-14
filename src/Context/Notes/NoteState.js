@@ -18,6 +18,27 @@ const NoteState = (props)=>{
         fetchAllNotesByUser();
     },[])
 
+    const updateNoteList = (note, mode)=>{
+        switch(mode){
+            case "ADD":{
+                setNoteList(prevList => ([...prevList, note]));
+                break;
+            }
+            case "UPDATE":{
+                let newList = noteList.filter(obj => obj._id !== note._id);
+                newList.push(note);
+                setNoteList(newList);
+                break;
+            }
+            case "REMOVE":{
+                let newList = noteList.filter(obj => obj._id !== note._id);
+                setNoteList(newList);
+                break;
+            }
+        }
+        
+    }
+
     const fetchAllNotesByUser = async ()=>{
         const response = await fetch(process.env.REACT_APP_FETCH_ALL_NOTES_URL, {
             method: 'POST',
@@ -45,16 +66,46 @@ const NoteState = (props)=>{
             body: JSON.stringify({title, description, tag})
         });
         const data = await response.json();
-        if (data.success)fetchAllNotesByUser();
+        if (!data?.error){
+            updateNoteList(data, "ADD");
+            return {success: true};
+        }
         return data;
     }
 
-    const editNote = ()=>{
-
+    const editNote = async (e, {title, description, tag}, noteID)=>{
+        e.preventDefault();
+        const response = await fetch(process.env.REACT_APP_UPDATE_NOTE_URL + "/" + noteID, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': user.auth_token
+            },
+            body: JSON.stringify({title, description, tag})
+        });
+        const data = await response.json();
+        if (!data?.error){
+            updateNoteList(data, "UPDATE");
+            return {success: true};
+        }
+        return data;
     }
 
-    const deleteNote = ()=>{
-
+    const deleteNote = async (e, noteID)=>{
+        e.preventDefault();
+        const response = await fetch(process.env.REACT_APP_DELETE_NOTE_URL + "/" + noteID, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': user.auth_token
+            }
+        });
+        const data = await response.json();
+        if (!data?.error){
+            updateNoteList(data, "REMOVE");
+            return {success: true};
+        }
+        return data;
     }
 
     const CRUD = {

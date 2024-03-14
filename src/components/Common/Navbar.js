@@ -20,8 +20,8 @@ const TopNavbar = () => {
                 </Navbar.Collapse>
                 {
                     user.isAuthenticate?
-                    <div>
-                        <NavLink className="mx-1 profileBtn" to="/profile">{user.name}</NavLink>
+                    <div className='d-flex align-items-center'>
+                        <h5 className="mx-1 mb-0 me-3 profileBtn" to="/profile">{user.name}</h5>
                         <div className="btn btn-primary mx-1" onClick={signOut}>Logout</div>
                     </div>:
                     <div>

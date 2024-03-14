@@ -37,7 +37,7 @@ router.post('/addnote',
                 "description": description,
                 "tag": tag
             });
-            res.status(200).send({success: true});
+            res.status(200).send(note);
         } catch (error) {
             res.status(500).send({error:"Internal server error"})
         }
@@ -66,7 +66,7 @@ router.put('/updatenote/:id',
             note = await Notes.findByIdAndUpdate(req.params.id, {$set:updateNote}, {new:true});
             res.status(200).send(note);
         } catch (error) {
-            res.status(500).send("Internal server error");
+            res.status(500).send({error:"Internal server error"});
         }
     }
 )
@@ -86,7 +86,7 @@ router.delete('/deletenote/:id',
             note = await Notes.findByIdAndDelete(req.params.id);
             res.status(200).send(note);
         } catch (error) {
-            res.status(500).send("Internal server error");
+            res.status(500).send({error:"Internal server error"});
         }
     }
 )
