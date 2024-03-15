@@ -11,10 +11,19 @@ const UserState = (props)=>{
     
     useEffect(()=>{
         isAuthenticate();
+        // eslint-disable-next-line
     },[]);
 
     const isAuthenticate = () => {
-        if (user.auth_token !== null)fetchUserDetails(user.auth_token);
+        if(user.isAuthenticate) {
+            fetchUserDetails(user.auth_token);
+            return ;
+        }
+        let a_token = localStorage.getItem('auth-token');
+        if (a_token !== null){
+            setUser(prevUser=>({...prevUser, ["auth_token"]:a_token, ["isAuthenticate"]:true }))
+            fetchUserDetails(a_token);
+        }
     }
     
     const signUp = async(e, {name, email, password})=>{
@@ -30,7 +39,6 @@ const UserState = (props)=>{
         if (data?.authToken){
             localStorage.setItem('auth-token', data.authToken);
             isAuthenticate();
-            fetchUserDetails(data.authToken);
             return {success: true};
         }
         return {data, success: false};
@@ -49,7 +57,6 @@ const UserState = (props)=>{
         if (data?.authToken){
             localStorage.setItem('auth-token', data.authToken);
             isAuthenticate();
-            fetchUserDetails(data.authToken);
             return {success: true};
         }
         return {data, success: false};

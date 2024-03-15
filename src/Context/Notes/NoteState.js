@@ -16,6 +16,7 @@ const NoteState = (props)=>{
     useEffect(()=>{
         checkAuthenticate();
         fetchAllNotesByUser();
+        // eslint-disable-next-line
     },[])
 
     const updateNoteList = (note, mode)=>{
@@ -34,6 +35,9 @@ const NoteState = (props)=>{
                 let newList = noteList.filter(obj => obj._id !== note._id);
                 setNoteList(newList);
                 break;
+            }
+            default:{
+                console.log("failed");
             }
         }
         
